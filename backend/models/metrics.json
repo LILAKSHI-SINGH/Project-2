@@ -1,0 +1,44 @@
+{
+  "is_trained": true,
+  "model_name": "Hybrid IsolationForest + RandomForest Framework",
+  "algorithms": [
+    "Isolation Forest (Anomaly Detection)",
+    "Random Forest (Supervised Classification)"
+  ],
+  "training_dataset": "sample_traffic.csv",
+  "training_samples": 900,
+  "test_samples": 300,
+  "num_features": 16,
+  "accuracy": 1.0,
+  "precision": 1.0,
+  "recall": 1.0,
+  "f1_score": 1.0,
+  "roc_auc": 1.0,
+  "classes": [
+    "Brute Force",
+    "DoS/DDoS",
+    "Normal",
+    "Potential Zero-Day Attack",
+    "Probe/Scanning"
+  ],
+  "feature_list": [
+    "flow_duration",
+    "total_fwd_packets",
+    "total_bwd_packets",
+    "total_length_fwd_packets",
+    "total_length_bwd_packets",
+    "fwd_packet_length_mean",
+    "bwd_packet_length_mean",
+    "flow_bytes_s",
+    "flow_packets_s",
+    "packet_length_mean",
+    "packet_length_variance",
+    "syn_flag_count",
+    "ack_flag_count",
+    "fin_flag_count",
+    "destination_port",
+    "source_port"
+  ],
+  "xai_method": "SHAP (TreeExplainer) + Model Feature Importances",
+  "last_trained": "2026-10-06T13:40:31.462855+00:00"
+}
