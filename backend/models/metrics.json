@@ -40,5 +40,5 @@
     "source_port"
   ],
   "xai_method": "SHAP (TreeExplainer) + Model Feature Importances",
-  "last_trained": "2026-10-06T13:40:31.462855+00:00"
+  "last_trained": "2026-10-07T04:09:29.203033+00:00"
 }
