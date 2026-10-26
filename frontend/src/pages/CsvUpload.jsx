@@ -72,7 +72,7 @@ const CsvUpload = () => {
           <span>Batch Network Traffic Analysis (CSV Upload)</span>
         </h2>
         <p className="text-xs text-slate-400 font-mono mb-4">
-          Upload a network traffic dataset CSV (compatible with CIC-IDS2017 feature schemas). Max file size 15MB.
+          Upload a network traffic dataset CSV (compatible with CIC-IDS2017 feature schemas).
         </p>
 
         <form onSubmit={handleUpload} className="space-y-4">
