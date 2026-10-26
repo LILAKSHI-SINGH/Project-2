@@ -13,6 +13,7 @@ function App() {
   const [activeTab, setActiveTab] = useState('dashboard');
   const [isBackendConnected, setIsBackendConnected] = useState(false);
   const [modelInfo, setModelInfo] = useState(null);
+  const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
 
   const checkStatus = () => {
     getHealth()
@@ -50,20 +51,26 @@ function App() {
   };
 
   return (
-    <div className="flex min-h-screen bg-slate-950 text-slate-100">
+    <div className="flex min-h-screen bg-slate-950 text-slate-100 relative overflow-x-hidden">
       {/* Sidebar */}
       <Sidebar
         activeTab={activeTab}
-        setActiveTab={setActiveTab}
+        setActiveTab={(tab) => {
+          setActiveTab(tab);
+          setMobileSidebarOpen(false);
+        }}
         isBackendConnected={isBackendConnected}
+        mobileOpen={mobileSidebarOpen}
+        onCloseMobile={() => setMobileSidebarOpen(false)}
       />
 
       {/* Main Content Area */}
-      <div className="flex-1 flex flex-col min-w-0">
+      <div className="flex-1 flex flex-col min-w-0 w-full">
         <Navbar
           activeTab={activeTab}
           onRefresh={checkStatus}
           modelInfo={modelInfo}
+          onOpenMobileSidebar={() => setMobileSidebarOpen(true)}
         />
 
         <main className="flex-1 overflow-y-auto">

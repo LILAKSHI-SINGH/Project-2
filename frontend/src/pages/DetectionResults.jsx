@@ -49,53 +49,55 @@ const DetectionResults = () => {
   const totalPages = Math.ceil(total / pageSize) || 1;
 
   return (
-    <div className="p-6 space-y-6">
+    <div className="p-3.5 sm:p-6 space-y-4 sm:space-y-6 max-w-full">
       {/* Search & Filter Header */}
-      <div className="glass-card p-5 border-slate-800 flex flex-col md:flex-row md:items-center justify-between gap-4">
+      <div className="glass-card p-4 sm:p-5 border-slate-800 flex flex-col md:flex-row md:items-center justify-between gap-3 sm:gap-4">
         <div>
-          <h2 className="text-base font-bold text-slate-100">Detection History & Forensics</h2>
-          <p className="text-xs text-slate-400 font-mono mt-0.5">
+          <h2 className="text-sm sm:text-base font-bold text-slate-100">Detection History & Forensics</h2>
+          <p className="text-[11px] sm:text-xs text-slate-400 font-mono mt-0.5">
             Query stored detection logs from SQLite backend database.
           </p>
         </div>
 
-        <form onSubmit={handleSearchSubmit} className="flex flex-wrap items-center gap-3">
-          <div className="relative">
+        <form onSubmit={handleSearchSubmit} className="flex flex-col sm:flex-row flex-wrap sm:items-center gap-2 sm:gap-3 w-full md:w-auto">
+          <div className="relative w-full sm:w-56">
             <Search className="w-4 h-4 text-slate-400 absolute left-3 top-2.5" />
             <input
               type="text"
               placeholder="Search IP or Prediction..."
               value={search}
               onChange={(e) => setSearch(e.target.value)}
-              className="bg-slate-950 border border-slate-800 rounded-lg pl-9 pr-3 py-1.5 text-xs text-slate-200 focus:border-indigo-500 focus:outline-none w-56 font-mono"
+              className="bg-slate-950 border border-slate-800 rounded-lg pl-9 pr-3 py-1.5 text-xs text-slate-200 focus:border-indigo-500 focus:outline-none w-full font-mono"
             />
           </div>
 
-          <select
-            value={riskFilter}
-            onChange={(e) => { setRiskFilter(e.target.value); setPage(1); }}
-            className="bg-slate-950 border border-slate-800 rounded-lg px-3 py-1.5 text-xs text-slate-300 focus:border-indigo-500 focus:outline-none font-mono"
-          >
-            <option value="">All Risk Levels</option>
-            <option value="Low Risk">Low Risk</option>
-            <option value="Medium Risk">Medium Risk</option>
-            <option value="High Risk">High Risk</option>
-            <option value="Critical Risk">Critical Risk</option>
-          </select>
+          <div className="flex items-center gap-2 w-full sm:w-auto">
+            <select
+              value={riskFilter}
+              onChange={(e) => { setRiskFilter(e.target.value); setPage(1); }}
+              className="bg-slate-950 border border-slate-800 rounded-lg px-3 py-1.5 text-xs text-slate-300 focus:border-indigo-500 focus:outline-none font-mono flex-1 sm:flex-none"
+            >
+              <option value="">All Risk Levels</option>
+              <option value="Low Risk">Low Risk</option>
+              <option value="Medium Risk">Medium Risk</option>
+              <option value="High Risk">High Risk</option>
+              <option value="Critical Risk">Critical Risk</option>
+            </select>
 
-          <label className="flex items-center space-x-1.5 text-xs font-mono text-purple-300 cursor-pointer bg-purple-500/10 border border-purple-500/30 px-3 py-1.5 rounded-lg">
-            <input
-              type="checkbox"
-              checked={zeroDayOnly}
-              onChange={(e) => { setZeroDayOnly(e.target.checked); setPage(1); }}
-              className="rounded text-purple-600 focus:ring-purple-500 bg-slate-950 border-slate-800"
-            />
-            <span>Zero-Day Only</span>
-          </label>
+            <label className="flex items-center space-x-1.5 text-xs font-mono text-purple-300 cursor-pointer bg-purple-500/10 border border-purple-500/30 px-3 py-1.5 rounded-lg shrink-0">
+              <input
+                type="checkbox"
+                checked={zeroDayOnly}
+                onChange={(e) => { setZeroDayOnly(e.target.checked); setPage(1); }}
+                className="rounded text-purple-600 focus:ring-purple-500 bg-slate-950 border-slate-800"
+              />
+              <span>Zero-Day</span>
+            </label>
+          </div>
 
           <button
             type="submit"
-            className="px-3 py-1.5 bg-indigo-600 hover:bg-indigo-500 text-white rounded-lg text-xs font-semibold font-mono"
+            className="w-full sm:w-auto justify-center px-4 py-1.5 bg-indigo-600 hover:bg-indigo-500 text-white rounded-lg text-xs font-semibold font-mono flex items-center"
           >
             Search
           </button>
@@ -105,7 +107,7 @@ const DetectionResults = () => {
       {/* Detections Data Table */}
       <div className="glass-card border-slate-800 overflow-hidden">
         <div className="overflow-x-auto">
-          <table className="w-full text-left border-collapse text-xs font-mono">
+          <table className="w-full min-w-[720px] text-left border-collapse text-xs font-mono">
             <thead>
               <tr className="bg-slate-950/80 text-slate-400 border-b border-slate-800">
                 <th className="py-3 px-4">ID</th>

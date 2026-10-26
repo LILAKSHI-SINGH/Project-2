@@ -26,16 +26,16 @@ const DetectionModal = ({ detectionId, onClose }) => {
   if (!detectionId) return null;
 
   return (
-    <div className="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-md flex items-center justify-center p-4 overflow-y-auto">
-      <div className="bg-slate-900 border border-slate-800 rounded-xl w-full max-w-4xl shadow-2xl overflow-hidden relative">
+    <div className="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-md flex items-center justify-center p-2 sm:p-4 overflow-y-auto">
+      <div className="bg-slate-900 border border-slate-800 rounded-xl w-full max-w-4xl shadow-2xl overflow-hidden relative flex flex-col max-h-[92vh]">
         {/* Header */}
-        <div className="flex items-center justify-between px-6 py-4 border-b border-slate-800 bg-slate-950/60">
-          <div className="flex items-center space-x-3">
-            <div className={`p-2 rounded-lg ${data?.is_zero_day ? 'bg-purple-500/20 text-purple-400 border border-purple-500/40' : 'bg-indigo-500/20 text-indigo-400 border border-indigo-500/30'}`}>
-              <ShieldAlert className="w-5 h-5" />
+        <div className="flex items-center justify-between px-4 py-3 sm:px-6 sm:py-4 border-b border-slate-800 bg-slate-950/60 shrink-0">
+          <div className="flex items-center space-x-2.5 sm:space-x-3">
+            <div className={`p-1.5 sm:p-2 rounded-lg shrink-0 ${data?.is_zero_day ? 'bg-purple-500/20 text-purple-400 border border-purple-500/40' : 'bg-indigo-500/20 text-indigo-400 border border-indigo-500/30'}`}>
+              <ShieldAlert className="w-4 h-4 sm:w-5 sm:h-5" />
             </div>
             <div>
-              <h3 className="text-base font-bold text-slate-100 flex items-center space-x-2">
+              <h3 className="text-sm sm:text-base font-bold text-slate-100 flex flex-wrap items-center gap-1.5 sm:gap-2">
                 <span>Detection #{detectionId}</span>
                 {data?.is_zero_day && (
                   <span className="px-2 py-0.5 rounded text-[10px] uppercase tracking-wider font-extrabold bg-purple-500/20 text-purple-300 border border-purple-500/40 glow-purple">
@@ -43,14 +43,14 @@ const DetectionModal = ({ detectionId, onClose }) => {
                   </span>
                 )}
               </h3>
-              <p className="text-xs text-slate-400 font-mono">
+              <p className="text-[11px] sm:text-xs text-slate-400 font-mono">
                 {data?.timestamp ? new Date(data.timestamp).toLocaleString() : 'Loading...'}
               </p>
             </div>
           </div>
           <button
             onClick={onClose}
-            className="p-1.5 text-slate-400 hover:text-slate-100 hover:bg-slate-800 rounded-lg transition-colors"
+            className="p-1.5 text-slate-400 hover:text-slate-100 hover:bg-slate-800 rounded-lg transition-colors shrink-0"
           >
             <X className="w-5 h-5" />
           </button>
@@ -58,19 +58,19 @@ const DetectionModal = ({ detectionId, onClose }) => {
 
         {/* Modal Body */}
         {loading ? (
-          <div className="p-12 text-center text-slate-400 font-mono text-sm">
+          <div className="p-8 sm:p-12 text-center text-slate-400 font-mono text-sm">
             Fetching Explainable AI Breakdown...
           </div>
         ) : error ? (
-          <div className="p-8 text-center text-rose-400 font-mono text-sm">
+          <div className="p-6 sm:p-8 text-center text-rose-400 font-mono text-sm">
             {error}
           </div>
         ) : (
-          <div className="p-6 space-y-6 max-h-[80vh] overflow-y-auto">
+          <div className="p-4 sm:p-6 space-y-4 sm:space-y-6 overflow-y-auto flex-1">
             {/* Top Grid: Classification & Risk Gauge */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6">
               {/* Prediction Summary */}
-              <div className="md:col-span-2 bg-slate-950/60 border border-slate-800 rounded-xl p-5 flex flex-col justify-between">
+              <div className="md:col-span-2 bg-slate-950/60 border border-slate-800 rounded-xl p-4 sm:p-5 flex flex-col justify-between">
                 <div>
                   <div className="text-xs text-slate-400 font-mono uppercase tracking-wider font-semibold mb-1">
                     Classification Result

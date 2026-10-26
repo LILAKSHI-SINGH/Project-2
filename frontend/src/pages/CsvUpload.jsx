@@ -64,19 +64,19 @@ const CsvUpload = () => {
   };
 
   return (
-    <div className="p-6 space-y-6">
+    <div className="p-3.5 sm:p-6 space-y-4 sm:space-y-6 max-w-full">
       {/* File Upload Box */}
-      <div className="glass-card p-6 border-slate-800">
-        <h2 className="text-base font-bold text-slate-100 flex items-center space-x-2 mb-2">
-          <UploadCloud className="w-5 h-5 text-indigo-400" />
+      <div className="glass-card p-4 sm:p-6 border-slate-800">
+        <h2 className="text-sm sm:text-base font-bold text-slate-100 flex items-center space-x-2 mb-2">
+          <UploadCloud className="w-4 h-4 sm:w-5 sm:h-5 text-indigo-400" />
           <span>Batch Network Traffic Analysis (CSV Upload)</span>
         </h2>
-        <p className="text-xs text-slate-400 font-mono mb-4">
+        <p className="text-[11px] sm:text-xs text-slate-400 font-mono mb-4">
           Upload a network traffic dataset CSV (compatible with CIC-IDS2017 feature schemas).
         </p>
 
         <form onSubmit={handleUpload} className="space-y-4">
-          <div className="border-2 border-dashed border-slate-800 hover:border-indigo-500/50 rounded-xl p-8 text-center transition-colors bg-slate-950/40">
+          <div className="border-2 border-dashed border-slate-800 hover:border-indigo-500/50 rounded-xl p-5 sm:p-8 text-center transition-colors bg-slate-950/40">
             <input
               type="file"
               accept=".csv"
@@ -85,23 +85,23 @@ const CsvUpload = () => {
               id="csv-file-input"
             />
             <label htmlFor="csv-file-input" className="cursor-pointer flex flex-col items-center justify-center">
-              <FileSpreadsheet className="w-10 h-10 text-indigo-400 mb-2" />
+              <FileSpreadsheet className="w-8 h-8 sm:w-10 sm:h-10 text-indigo-400 mb-2" />
               {file ? (
-                <span className="text-sm font-semibold text-slate-200 font-mono">{file.name} ({(file.size / 1024).toFixed(1)} KB)</span>
+                <span className="text-xs sm:text-sm font-semibold text-slate-200 font-mono break-all">{file.name} ({(file.size / 1024).toFixed(1)} KB)</span>
               ) : (
                 <>
-                  <span className="text-sm font-semibold text-slate-300">Click to select CSV dataset</span>
-                  <span className="text-xs text-slate-500 font-mono mt-1">Supports Flow Duration, SYN/ACK Flags, Flow Bytes/s, Ports...</span>
+                  <span className="text-xs sm:text-sm font-semibold text-slate-300">Click to select CSV dataset</span>
+                  <span className="text-[11px] text-slate-500 font-mono mt-1">Supports Flow Duration, SYN/ACK Flags, Flow Bytes/s, Ports...</span>
                 </>
               )}
             </label>
           </div>
 
-          <div className="flex items-center justify-end space-x-3">
+          <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-end gap-2 sm:gap-3">
             <button
               type="submit"
               disabled={!file || loading}
-              className="px-5 py-2.5 bg-indigo-600 hover:bg-indigo-500 disabled:opacity-50 text-white font-bold text-xs rounded-lg shadow-lg shadow-indigo-500/20 transition-all flex items-center space-x-2"
+              className="w-full sm:w-auto px-5 py-2.5 bg-indigo-600 hover:bg-indigo-500 disabled:opacity-50 text-white font-bold text-xs rounded-lg shadow-lg shadow-indigo-500/20 transition-all flex items-center justify-center space-x-2"
             >
               {loading ? (
                 <span>Batch ML Evaluation in Progress...</span>
@@ -124,19 +124,19 @@ const CsvUpload = () => {
 
       {/* Summary Analytics Cards */}
       {summary && (
-        <div className="space-y-6">
-          <div className="flex items-center justify-between">
+        <div className="space-y-4 sm:space-y-6">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2.5">
             <h3 className="text-sm font-bold text-slate-200">Bulk Analysis Results Overview</h3>
             <button
               onClick={downloadCSV}
-              className="px-3.5 py-1.5 bg-slate-800 hover:bg-slate-700 border border-slate-700 text-slate-200 rounded text-xs font-mono font-semibold flex items-center space-x-1.5 transition-colors"
+              className="w-full sm:w-auto justify-center px-3.5 py-1.5 bg-slate-800 hover:bg-slate-700 border border-slate-700 text-slate-200 rounded text-xs font-mono font-semibold flex items-center space-x-1.5 transition-colors"
             >
               <Download className="w-3.5 h-3.5 text-indigo-400" />
               <span>Export Analyzed CSV</span>
             </button>
           </div>
 
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3">
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-2.5 sm:gap-3">
             <div className="glass-card p-4 text-center">
               <span className="text-[11px] text-slate-400 font-mono block">Total Rows</span>
               <span className="text-2xl font-extrabold text-slate-100 font-mono">{summary.total_records}</span>
@@ -171,7 +171,7 @@ const CsvUpload = () => {
               </h4>
             </div>
             <div className="overflow-x-auto max-h-96">
-              <table className="w-full text-left border-collapse text-xs font-mono">
+              <table className="w-full min-w-[580px] text-left border-collapse text-xs font-mono">
                 <thead>
                   <tr className="bg-slate-950/60 text-slate-400 border-b border-slate-800 sticky top-0">
                     <th className="py-2.5 px-4">Flow ID</th>

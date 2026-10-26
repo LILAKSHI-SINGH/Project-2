@@ -65,26 +65,26 @@ const Dashboard = () => {
     : [];
 
   return (
-    <div className="p-6 space-y-6">
+    <div className="p-3.5 sm:p-6 space-y-4 sm:space-y-6 max-w-full">
       {/* Top Banner Alert if Zero-Day detected */}
       {stats?.potential_zero_days_count > 0 && (
-        <div className="bg-gradient-to-r from-purple-900/60 via-slate-900 to-indigo-900/60 border border-purple-500/40 rounded-xl p-4 flex items-center justify-between shadow-xl glow-purple">
-          <div className="flex items-center space-x-3">
-            <div className="p-2.5 bg-purple-500/20 text-purple-400 rounded-lg pulse-alert border border-purple-500/40">
-              <Zap className="w-6 h-6" />
+        <div className="bg-gradient-to-r from-purple-900/60 via-slate-900 to-indigo-900/60 border border-purple-500/40 rounded-xl p-3.5 sm:p-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 shadow-xl glow-purple">
+          <div className="flex items-start sm:items-center space-x-3">
+            <div className="p-2 sm:p-2.5 bg-purple-500/20 text-purple-400 rounded-lg pulse-alert border border-purple-500/40 shrink-0 mt-0.5 sm:mt-0">
+              <Zap className="w-5 h-5 sm:w-6 sm:h-6" />
             </div>
             <div>
-              <h3 className="font-bold text-slate-100 text-sm tracking-wide">
+              <h3 className="font-bold text-slate-100 text-xs sm:text-sm tracking-wide">
                 Zero-Day Anomaly Detection Triggered
               </h3>
-              <p className="text-xs text-purple-200 mt-0.5">
+              <p className="text-[11px] sm:text-xs text-purple-200 mt-0.5">
                 The SHAP Framework has flagged {stats.potential_zero_days_count} potential zero-day network traffic flow(s).
               </p>
             </div>
           </div>
           <button
             onClick={fetchDashboardData}
-            className="px-3.5 py-1.5 bg-purple-600 hover:bg-purple-500 text-white rounded-lg text-xs font-semibold shadow transition-colors flex items-center space-x-1.5"
+            className="w-full sm:w-auto justify-center px-3.5 py-1.5 bg-purple-600 hover:bg-purple-500 text-white rounded-lg text-xs font-semibold shadow transition-colors flex items-center space-x-1.5 shrink-0"
           >
             <RefreshCw className="w-3.5 h-3.5" />
             <span>Refresh SOC</span>
@@ -93,58 +93,58 @@ const Dashboard = () => {
       )}
 
       {/* KPI Cards Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
         {/* Total Analyzed */}
-        <div className="glass-card p-5 border-slate-800">
+        <div className="glass-card p-4 sm:p-5 border-slate-800">
           <div className="flex items-center justify-between">
             <span className="text-xs text-slate-400 font-mono font-semibold uppercase">Total Traffic</span>
             <div className="p-2 bg-indigo-500/10 text-indigo-400 rounded-lg">
-              <Activity className="w-5 h-5" />
+              <Activity className="w-4 h-4 sm:w-5 sm:h-5" />
             </div>
           </div>
-          <div className="text-3xl font-extrabold text-slate-100 mt-3 font-mono">
+          <div className="text-2xl sm:text-3xl font-extrabold text-slate-100 mt-2 sm:mt-3 font-mono">
             {stats?.total_analyzed?.toLocaleString() || 0}
           </div>
           <p className="text-[11px] text-slate-400 mt-1 font-mono">Flows Evaluated</p>
         </div>
 
         {/* Normal Traffic */}
-        <div className="glass-card p-5 border-slate-800">
+        <div className="glass-card p-4 sm:p-5 border-slate-800">
           <div className="flex items-center justify-between">
             <span className="text-xs text-slate-400 font-mono font-semibold uppercase">Normal Traffic</span>
             <div className="p-2 bg-emerald-500/10 text-emerald-400 rounded-lg">
-              <CheckCircle className="w-5 h-5" />
+              <CheckCircle className="w-4 h-4 sm:w-5 sm:h-5" />
             </div>
           </div>
-          <div className="text-3xl font-extrabold text-emerald-400 mt-3 font-mono">
+          <div className="text-2xl sm:text-3xl font-extrabold text-emerald-400 mt-2 sm:mt-3 font-mono">
             {stats?.normal_count?.toLocaleString() || 0}
           </div>
           <p className="text-[11px] text-slate-400 mt-1 font-mono">Clean Packets</p>
         </div>
 
         {/* Known Attacks */}
-        <div className="glass-card p-5 border-slate-800">
+        <div className="glass-card p-4 sm:p-5 border-slate-800">
           <div className="flex items-center justify-between">
             <span className="text-xs text-slate-400 font-mono font-semibold uppercase">Known Attacks</span>
             <div className="p-2 bg-rose-500/10 text-rose-400 rounded-lg">
-              <ShieldAlert className="w-5 h-5" />
+              <ShieldAlert className="w-4 h-4 sm:w-5 sm:h-5" />
             </div>
           </div>
-          <div className="text-3xl font-extrabold text-rose-400 mt-3 font-mono">
+          <div className="text-2xl sm:text-3xl font-extrabold text-rose-400 mt-2 sm:mt-3 font-mono">
             {stats?.known_attacks_count?.toLocaleString() || 0}
           </div>
           <p className="text-[11px] text-slate-400 mt-1 font-mono">DoS / Probe / Brute Force</p>
         </div>
 
         {/* Potential Zero-Days */}
-        <div className="glass-card p-5 border-slate-800 border-purple-500/30">
+        <div className="glass-card p-4 sm:p-5 border-slate-800 border-purple-500/30">
           <div className="flex items-center justify-between">
             <span className="text-xs text-purple-300 font-mono font-semibold uppercase">Potential Zero-Day</span>
             <div className="p-2 bg-purple-500/20 text-purple-400 rounded-lg glow-purple">
-              <BrainCircuit className="w-5 h-5" />
+              <BrainCircuit className="w-4 h-4 sm:w-5 sm:h-5" />
             </div>
           </div>
-          <div className="text-3xl font-extrabold text-purple-400 mt-3 font-mono">
+          <div className="text-2xl sm:text-3xl font-extrabold text-purple-400 mt-2 sm:mt-3 font-mono">
             {stats?.potential_zero_days_count?.toLocaleString() || 0}
           </div>
           <p className="text-[11px] text-purple-300/80 mt-1 font-mono">Zero-Day-Like Anomalies</p>
@@ -272,7 +272,7 @@ const Dashboard = () => {
         </div>
 
         <div className="overflow-x-auto">
-          <table className="w-full text-left border-collapse text-xs font-mono">
+          <table className="w-full min-w-[650px] text-left border-collapse text-xs font-mono">
             <thead>
               <tr className="bg-slate-950/60 text-slate-400 border-b border-slate-800">
                 <th className="py-3 px-4 font-semibold">ID</th>

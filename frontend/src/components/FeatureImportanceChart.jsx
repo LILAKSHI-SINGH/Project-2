@@ -71,14 +71,14 @@ const FeatureImportanceChart = ({ features = [] }) => {
           </BarChart>
         </ResponsiveContainer>
       </div>
-      <div className="flex items-center justify-center space-x-6 text-xs text-slate-400 mt-2 font-mono">
-        <div className="flex items-center space-x-2">
-          <span className="w-3 h-3 bg-emerald-500 rounded-sm"></span>
-          <span>Normal Indicator (Negative SHAP)</span>
+      <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-6 text-[10px] sm:text-xs text-slate-400 mt-2 font-mono text-center">
+        <div className="flex items-center space-x-1.5 sm:space-x-2">
+          <span className="w-2.5 h-2.5 sm:w-3 sm:h-3 bg-emerald-500 rounded-sm"></span>
+          <span>Normal (Negative SHAP)</span>
         </div>
-        <div className="flex items-center space-x-2">
-          <span className="w-3 h-3 bg-rose-500 rounded-sm"></span>
-          <span>Malicious / Anomaly Risk (Positive SHAP)</span>
+        <div className="flex items-center space-x-1.5 sm:space-x-2">
+          <span className="w-2.5 h-2.5 sm:w-3 sm:h-3 bg-rose-500 rounded-sm"></span>
+          <span>Anomaly Risk (Positive SHAP)</span>
         </div>
       </div>
     </div>

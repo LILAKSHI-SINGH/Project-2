@@ -6,12 +6,12 @@ import {
   ShieldAlert, 
   BrainCircuit, 
   Cpu, 
-  Terminal,
-  CheckCircle,
-  AlertTriangle
+  CheckCircle, 
+  AlertTriangle,
+  X
 } from 'lucide-react';
 
-const Sidebar = ({ activeTab, setActiveTab, isBackendConnected }) => {
+const Sidebar = ({ activeTab, setActiveTab, isBackendConnected, mobileOpen, onCloseMobile }) => {
   const menuItems = [
     { id: 'dashboard', label: 'SOC Dashboard', icon: LayoutDashboard },
     { id: 'analysis', label: 'Traffic Analysis', icon: Activity },
@@ -22,61 +22,88 @@ const Sidebar = ({ activeTab, setActiveTab, isBackendConnected }) => {
   ];
 
   return (
-    <div className="w-64 bg-slate-900 border-r border-slate-800 flex flex-col justify-between h-screen sticky top-0">
-      <div>
-        {/* Brand Header */}
-        <div className="p-5 border-b border-slate-800 flex items-center space-x-3">
-          <div className="p-2 bg-indigo-600/20 border border-indigo-500/40 rounded-lg text-indigo-400">
-            <ShieldAlert className="w-6 h-6" />
+    <>
+      {/* Mobile Backdrop Overlay */}
+      {mobileOpen && (
+        <div 
+          onClick={onCloseMobile}
+          className="fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-40 md:hidden transition-opacity duration-300"
+          aria-hidden="true"
+        />
+      )}
+
+      {/* Sidebar Drawer */}
+      <aside 
+        className={`fixed md:sticky top-0 inset-y-0 left-0 z-50 w-64 bg-slate-900 border-r border-slate-800 flex flex-col justify-between h-screen transition-transform duration-300 ease-in-out shrink-0 ${
+          mobileOpen ? 'translate-x-0 shadow-2xl' : '-translate-x-full md:translate-x-0'
+        }`}
+      >
+        <div>
+          {/* Brand Header */}
+          <div className="p-4 sm:p-5 border-b border-slate-800 flex items-center justify-between">
+            <div className="flex items-center space-x-3">
+              <div className="p-2 bg-indigo-600/20 border border-indigo-500/40 rounded-lg text-indigo-400">
+                <ShieldAlert className="w-5 h-5 sm:w-6 sm:h-6" />
+              </div>
+              <div>
+                <h1 className="font-bold text-slate-100 text-sm tracking-wide leading-snug">ZeroDay-XAI</h1>
+                <p className="text-[11px] text-slate-400 font-mono">SOC Anomaly Shield</p>
+              </div>
+            </div>
+
+            {/* Mobile Close Button */}
+            <button
+              onClick={onCloseMobile}
+              className="p-1.5 text-slate-400 hover:text-slate-100 hover:bg-slate-800 rounded-lg md:hidden transition-colors"
+              aria-label="Close menu"
+            >
+              <X className="w-5 h-5" />
+            </button>
           </div>
-          <div>
-            <h1 className="font-bold text-slate-100 text-sm tracking-wide leading-snug">ZeroDay-XAI</h1>
-            <p className="text-[11px] text-slate-400 font-mono">SOC Anomaly Shield</p>
-          </div>
+
+          {/* Navigation Items */}
+          <nav className="p-3 space-y-1 mt-2">
+            {menuItems.map((item) => {
+              const Icon = item.icon;
+              const isActive = activeTab === item.id;
+              return (
+                <button
+                  key={item.id}
+                  onClick={() => setActiveTab(item.id)}
+                  className={`w-full flex items-center space-x-3 px-3.5 py-2.5 rounded-lg text-sm font-medium transition-all duration-200 ${
+                    isActive
+                      ? 'bg-gradient-to-r from-indigo-600/90 to-purple-600/90 text-white shadow-lg shadow-indigo-500/20'
+                      : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800/60'
+                  }`}
+                >
+                  <Icon className={`w-4 h-4 ${isActive ? 'text-white' : 'text-slate-400'}`} />
+                  <span>{item.label}</span>
+                </button>
+              );
+            })}
+          </nav>
         </div>
 
-        {/* Navigation Items */}
-        <nav className="p-3 space-y-1.5 mt-2">
-          {menuItems.map((item) => {
-            const Icon = item.icon;
-            const isActive = activeTab === item.id;
-            return (
-              <button
-                key={item.id}
-                onClick={() => setActiveTab(item.id)}
-                className={`w-full flex items-center space-x-3 px-3.5 py-2.5 rounded-lg text-sm font-medium transition-all duration-200 ${
-                  isActive
-                    ? 'bg-gradient-to-r from-indigo-600/90 to-purple-600/90 text-white shadow-lg shadow-indigo-500/20'
-                    : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800/60'
-                }`}
-              >
-                <Icon className={`w-4 h-4 ${isActive ? 'text-white' : 'text-slate-400'}`} />
-                <span>{item.label}</span>
-              </button>
-            );
-          })}
-        </nav>
-      </div>
-
-      {/* Connection & Status Footer */}
-      <div className="p-4 border-t border-slate-800 bg-slate-950/40">
-        <div className="flex items-center justify-between">
-          <span className="text-xs text-slate-400 font-mono">Backend Status:</span>
-          {isBackendConnected ? (
-            <span className="inline-flex items-center px-2 py-0.5 rounded text-[11px] font-medium bg-emerald-500/10 text-emerald-400 border border-emerald-500/30">
-              <CheckCircle className="w-3 h-3 mr-1" /> Connected
-            </span>
-          ) : (
-            <span className="inline-flex items-center px-2 py-0.5 rounded text-[11px] font-medium bg-rose-500/10 text-rose-400 border border-rose-500/30">
-              <AlertTriangle className="w-3 h-3 mr-1" /> Disconnected
-            </span>
-          )}
+        {/* Connection & Status Footer */}
+        <div className="p-4 border-t border-slate-800 bg-slate-950/40">
+          <div className="flex items-center justify-between">
+            <span className="text-xs text-slate-400 font-mono">Backend Status:</span>
+            {isBackendConnected ? (
+              <span className="inline-flex items-center px-2 py-0.5 rounded text-[11px] font-medium bg-emerald-500/10 text-emerald-400 border border-emerald-500/30">
+                <CheckCircle className="w-3 h-3 mr-1" /> Connected
+              </span>
+            ) : (
+              <span className="inline-flex items-center px-2 py-0.5 rounded text-[11px] font-medium bg-rose-500/10 text-rose-400 border border-rose-500/30">
+                <AlertTriangle className="w-3 h-3 mr-1" /> Disconnected
+              </span>
+            )}
+          </div>
+          <div className="mt-3 text-[11px] text-slate-500 text-center font-mono">
+            B.Tech CS Final Project
+          </div>
         </div>
-        <div className="mt-3 text-[11px] text-slate-500 text-center font-mono">
-          B.Tech CS Final Project
-        </div>
-      </div>
-    </div>
+      </aside>
+    </>
   );
 };
 

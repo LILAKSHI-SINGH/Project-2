@@ -144,42 +144,42 @@ const TrafficAnalysis = () => {
   };
 
   return (
-    <div className="p-6 space-y-6">
+    <div className="p-3.5 sm:p-6 space-y-4 sm:space-y-6 max-w-full">
       {/* Header & Presets */}
-      <div className="glass-card p-5 border-slate-800 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+      <div className="glass-card p-4 sm:p-5 border-slate-800 flex flex-col md:flex-row md:items-center md:justify-between gap-3 sm:gap-4">
         <div>
-          <h2 className="text-base font-bold text-slate-100 flex items-center space-x-2">
-            <Cpu className="w-5 h-5 text-indigo-400" />
+          <h2 className="text-sm sm:text-base font-bold text-slate-100 flex items-center space-x-2">
+            <Cpu className="w-4 h-4 sm:w-5 sm:h-5 text-indigo-400" />
             <span>Interactive Network Flow Analyzer</span>
           </h2>
-          <p className="text-xs text-slate-400 font-mono mt-0.5">
+          <p className="text-[11px] sm:text-xs text-slate-400 font-mono mt-0.5">
             Manually enter traffic parameters or select a test scenario preset below.
           </p>
         </div>
 
-        <div className="flex flex-wrap items-center gap-2">
+        <div className="flex flex-wrap items-center gap-1.5 sm:gap-2">
           <span className="text-xs text-slate-400 font-mono font-semibold mr-1">Presets:</span>
           <button
             onClick={() => applyPreset('normal')}
-            className="px-2.5 py-1 bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 rounded text-xs font-mono font-medium transition-colors"
+            className="px-2 sm:px-2.5 py-1 bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 rounded text-[11px] sm:text-xs font-mono font-medium transition-colors"
           >
             Normal Flow
           </button>
           <button
             onClick={() => applyPreset('dos')}
-            className="px-2.5 py-1 bg-rose-500/10 hover:bg-rose-500/20 text-rose-400 border border-rose-500/30 rounded text-xs font-mono font-medium transition-colors"
+            className="px-2 sm:px-2.5 py-1 bg-rose-500/10 hover:bg-rose-500/20 text-rose-400 border border-rose-500/30 rounded text-[11px] sm:text-xs font-mono font-medium transition-colors"
           >
             DoS Attack
           </button>
           <button
             onClick={() => applyPreset('probe')}
-            className="px-2.5 py-1 bg-amber-500/10 hover:bg-amber-500/20 text-amber-400 border border-amber-500/30 rounded text-xs font-mono font-medium transition-colors"
+            className="px-2 sm:px-2.5 py-1 bg-amber-500/10 hover:bg-amber-500/20 text-amber-400 border border-amber-500/30 rounded text-[11px] sm:text-xs font-mono font-medium transition-colors"
           >
             Port Scan Probe
           </button>
           <button
             onClick={() => applyPreset('zeroday')}
-            className="px-2.5 py-1 bg-purple-500/20 hover:bg-purple-500/30 text-purple-300 border border-purple-500/40 rounded text-xs font-mono font-bold transition-colors glow-purple"
+            className="px-2 sm:px-2.5 py-1 bg-purple-500/20 hover:bg-purple-500/30 text-purple-300 border border-purple-500/40 rounded text-[11px] sm:text-xs font-mono font-bold transition-colors glow-purple"
           >
             Zero-Day Anomaly
           </button>
@@ -333,11 +333,11 @@ const TrafficAnalysis = () => {
           {result && (
             <div className="space-y-6">
               {/* Classification Summary Card */}
-              <div className="glass-card p-5 border-slate-800">
-                <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-800 pb-4">
+              <div className="glass-card p-4 sm:p-5 border-slate-800">
+                <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border-b border-slate-800 pb-4">
                   <div>
                     <span className="text-xs text-slate-400 font-mono uppercase tracking-wider block">ML Classification</span>
-                    <h3 className="text-2xl font-extrabold text-slate-100 mt-1 flex items-center space-x-2">
+                    <h3 className="text-xl sm:text-2xl font-extrabold text-slate-100 mt-1 flex flex-wrap items-center gap-2">
                       <span>{result.prediction}</span>
                       {result.is_zero_day && (
                         <span className="px-2 py-0.5 rounded text-[10px] font-extrabold bg-purple-500/20 text-purple-300 border border-purple-500/40 glow-purple">
@@ -347,7 +347,7 @@ const TrafficAnalysis = () => {
                     </h3>
                   </div>
 
-                  <div className="flex items-center space-x-4">
+                  <div className="flex items-center justify-center w-full sm:w-auto">
                     <RiskGauge
                       score={result.risk_score}
                       level={result.risk_level}
@@ -356,7 +356,7 @@ const TrafficAnalysis = () => {
                   </div>
                 </div>
 
-                <div className="grid grid-cols-3 gap-3 pt-4 text-xs font-mono">
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 sm:gap-3 pt-4 text-xs font-mono">
                   <div className="bg-slate-950/60 p-2.5 rounded border border-slate-800">
                     <span className="text-slate-500 block">Category:</span>
                     <span className="text-slate-200 font-bold">{result.attack_category}</span>
