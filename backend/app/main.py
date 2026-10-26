@@ -66,6 +66,22 @@ def read_root():
         "docs_url": "/docs"
     }
 
+@app.get("/api")
+def api_root():
+    return {
+        "status": "online",
+        "message": "Explainable AI Detection API Base URL",
+        "endpoints": {
+            "health": "/api/health",
+            "predict": "/api/predict",
+            "analyze_csv": "/api/analyze-csv",
+            "detections": "/api/detections",
+            "statistics": "/api/statistics",
+            "model_info": "/api/model-info",
+            "docs": "/docs"
+        }
+    }
+
 @app.get("/api/health")
 def health_check():
     return {
